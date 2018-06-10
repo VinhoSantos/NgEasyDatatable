@@ -1,0 +1,75 @@
+<div class="table-responsive-sm">
+    <table class="table table-light table-bordered ng-datatable">
+        <thead class="thead-dark">
+            <tr *ngIf="showSubHeaders">
+                <th scope="col" class="sub-header" *ngFor="let subHeader of subHeaders" [attr.colspan]="subHeader.columns">
+                    {{subHeader.text}}
+                </th>
+            </tr>
+            <tr>
+                <th scope="col" [attr.tabindex]="column.sortable ? 0 : undefined" *ngFor="let column of columns; let i = index;" (click)="sort(i + 1)"
+                    (keyup.enter)="sort(i + 1)" [ngClass]="{'sortable': column.sortable, 'sort-asc': column.isSortedAsc, 'sort-desc': column.isSortedDesc, 'small': column.isSmallColumn}">
+                    {{column.header}}
+                    <ng-header-template [column]="column" *ngIf="column.headerTemplate"></ng-header-template>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!data">
+                <td [attr.colspan]="columns.length">
+                    <p class="table-info-line">
+                        <i class="fa fa-cog fa-spin"></i> {{loadingText}}</p>
+                </td>
+            </tr>
+            <tr *ngIf="data && data.length === 0">
+                <td [attr.colspan]="columns.length">
+                    <p class="table-info-line">{{emptyDataText}}</p>
+                </td>
+            </tr>
+            <ng-template ngFor let-row [ngForOf]="pageData" let-i="index">
+                <tr [ngClass]="{'alternateBackground': row.alternateBackground}">
+                    <td *ngFor="let column of columns" [ngClass]="{'small': column.isSmallColumn}">
+                        {{column.content[i]}}
+                        <a aria-hidden="true" tabindex="0" *ngIf="column.showToggler && row.isExpandable" (click)="toggleExpandableRow(row)" (keyup.enter)="toggleExpandableRow(row)">
+                            <i class="fa text-dark" [ngClass]="{'fa-plus-square-o': !row.isExpanded, 'fa-minus-square-o': row.isExpanded}" aria-hidden="true"></i>
+                        </a>
+                        <input type="checkbox" [checked]="isSelected(row)" [disabled]="column.isDisabled" *ngIf="column.showSelector" (change)="onSelectedChange(row)"
+                        />
+                        <input type="radio" [checked]="isSelected(row)" [disabled]="column.isDisabled" *ngIf="column.showRadio" (change)="onSelectedChange(row)"
+                        />
+                        <ng-body-template [column]="column" [rowData]="row" [rowIndex]="calculateRowIndex(i)" *ngIf="column.bodyTemplate"></ng-body-template>
+                    </td>
+                </tr>
+                <tr *ngIf="row.isExpandable" class="expandable-row" [ngClass]="{'open': row.isExpanded, 'alternateBackground': row.alternateBackground}">
+                    <td [attr.colspan]="columns.length">
+                        <table class="table-bordered">
+                            <thead *ngIf="expandableRowHasColumnHeaders" class="thead-light">
+                                <tr>
+                                    <th *ngFor="let column of expandableColumns;" [ngClass]="{'small': column.isSmallColumn}">
+                                        {{column.header}}
+                                        <ng-expandable-header-template [column]="column" *ngIf="column.expandableHeaderTemplate"></ng-expandable-header-template>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let expRow of row[expandableRow?.field]; let j = index">
+                                    <td *ngFor="let column of expandableColumns;" [ngClass]="{'small': column.isSmallColumn}">
+                                        {{column.content[i][j]}}
+                                        <input type="checkbox" [checked]="isSelected(expRow)" *ngIf="column.showSelector" (change)="onSelectedChildChange(expRow, row)"
+                                        />
+                                        <input type="checkbox" [checked]="isSelected(expRow)" *ngIf="column.showRadio" (change)="onSelectedChildChange(expRow, row)"
+                                        />
+                                        <ng-expandable-body-template [column]="column" [rowData]="expRow" *ngIf="column.expandableBodyTemplate"></ng-expandable-body-template>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</div>
+<ng-pagination *ngIf="showPagination" (selectedPage)="handleNewPageSelected($event)" [totalPages]="totalPages"></ng-pagination>

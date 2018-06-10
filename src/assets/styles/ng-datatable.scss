@@ -1,0 +1,99 @@
+table.ng-datatable {
+    thead {
+        th {
+            text-transform: uppercase;
+
+            &.sortable {
+                cursor: pointer;
+                padding-left: 1.5rem;
+                position: relative;
+
+                &:before {
+                    position: absolute;
+                    left: 7px;
+                    display: inline-block;
+                    font: normal normal normal 14px/1 FontAwesome;
+                    font-size: inherit;
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    content: "\f0dc";
+                    color: $light;
+                }
+
+                &.sort-asc:before {
+                    position: absolute;
+                    left: 7px;
+                    content: "\f0de";
+                    color: $light;
+                }
+
+                &.sort-desc:before {
+                    position: absolute;
+                    left: 7px;
+                    content: "\f0dd";
+                    color: $light;
+                }
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            &.expandable-row {
+                display: none;
+            
+                &.open {
+                    display: table-row;
+                }
+            }
+
+            td {
+                i {
+                    &.fa {
+                        &.fa-plus-square-o,
+                        &.fa-minus-square-o {
+                            display: inline-block;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                table {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    td, th {
+        &.small {
+            width: 50px;
+            text-align: center;
+        }
+    }
+}
+
+ul.ng-datatable.pagination {
+    li {
+        &.page-item {
+            &.active {
+                a {
+                    &.page-link {
+                        background-color: $dark;
+                        border-color: $dark;
+                        color: $light;
+                    }
+                }
+            }
+
+            &.disabled {
+                opacity: 0.5;
+            }
+
+            .page-link {
+                color: $dark;
+            }
+        }
+    }
+}
