@@ -25,14 +25,14 @@ table.ng-datatable {
                     position: absolute;
                     left: 7px;
                     content: "\f0de";
-                    color: $light;
+                    color: $primary;
                 }
 
                 &.sort-desc:before {
                     position: absolute;
                     left: 7px;
                     content: "\f0dd";
-                    color: $light;
+                    color: $primary;
                 }
             }
         }

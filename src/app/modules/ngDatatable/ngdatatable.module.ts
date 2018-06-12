@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
-import { NgDatatableComponent } from './ngdatatable.component.ng2-datatable';
-import { 
-    NgDatatableColumnComponent, 
-    NgDatatableColumnBodyTemplateLoader, 
-    NgDatatableColumnHeaderTemplateLoader, 
-    NgDatatableColumnExpandableBodyTemplateLoader, 
+import { NgDatatableComponent } from './ngdatatable.component.ng-datatable';
+import {
+    NgDatatableColumnComponent,
+    NgDatatableColumnBodyTemplateLoader,
+    NgDatatableColumnHeaderTemplateLoader,
+    NgDatatableColumnExpandableBodyTemplateLoader,
     NgDatatableColumnExpandableHeaderTemplateLoader } from './ngdatatable.component.column';
 import { NgDatatableNumberColumnComponent } from './ngdatatable.component.number-column';
 import { NgDatatableBooleanColumnComponent } from './ngdatatable.component.boolean-column';
@@ -20,8 +19,8 @@ const COMPONENTS = [
     NgDatatableComponent,
     NgDatatableColumnComponent,
     NgDatatableColumnBodyTemplateLoader,
-    NgDatatableColumnHeaderTemplateLoader, 
-    NgDatatableColumnExpandableBodyTemplateLoader, 
+    NgDatatableColumnHeaderTemplateLoader,
+    NgDatatableColumnExpandableBodyTemplateLoader,
     NgDatatableColumnExpandableHeaderTemplateLoader,
     NgDatatableNumberColumnComponent,
     NgDatatableBooleanColumnComponent,
@@ -33,8 +32,7 @@ const COMPONENTS = [
 
 @NgModule({
     imports: [
-        CommonModule,
-        FormsModule
+        CommonModule
     ],
     declarations: [
         ...COMPONENTS
