@@ -5,7 +5,7 @@ import { NgDatatableBaseColumn } from './base-column';
     selector: 'ng-column',
     template: ''
 })
-export class NgDatatableColumnComponent extends NgDatatableBaseColumn {
+export class NgDatatableColumnComponent extends NgDatatableBaseColumn implements OnInit {
 
     @Input() field: string;
     @Input() header: string;
@@ -19,7 +19,7 @@ export class NgDatatableColumnComponent extends NgDatatableBaseColumn {
     @Input('small') isSmallColumn = false;
     @Input() filter: string;
     @Input() filterField: string;
-    @Input() filterDefault: number[] | boolean[] ; //the filter which is selected by default (other filters will not be selected by default): [enum or bool type]
+    @Input() filterDefault: number[] | boolean[] ; // the filter which is selected by default (other filters will not be selected by default): [enum or bool type]
     @Input() filterOnEmpty: string;
     @Input() subHeader = '';
     content: Array<any | string[]> = [];
@@ -46,15 +46,16 @@ export class NgDatatableColumnComponent extends NgDatatableBaseColumn {
         const x = a ? a.toString().toLowerCase() : '';
         const y = b ? b.toString().toLowerCase() : '';
 
-        if (x < y) return isAscending ? -1 : 1;
-        if (x > y) return isAscending ? 1 : -1;
+        if (x < y) { return isAscending ? -1 : 1; }
+        if (x > y) { return isAscending ? 1 : -1; }
         return 0;
     }
 
     setValue = (row: any, rowId: number, expRowId: number = undefined) => {
         if (expRowId !== undefined) {
-            if(!this.content[rowId])
+            if (!this.content[rowId]) {
                 this.content[rowId] = [];
+            }
             this.content[rowId][expRowId] = this.updateContent(row);
         } else {
             this.content[rowId] = this.updateContent(row);
@@ -66,13 +67,15 @@ export class NgDatatableColumnComponent extends NgDatatableBaseColumn {
     }
 
     getValueField = (row: any, field: string): any => {
-        if (!field)
+        if (!field) {
             return undefined;
+        }
         const multiField = field.split('.');
         let value = row;
         multiField.forEach(x => {
-            if (value === undefined)
+            if (value === undefined) {
                 return;
+            }
             value = value[x];
         });
 

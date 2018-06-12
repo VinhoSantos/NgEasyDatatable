@@ -1,6 +1,8 @@
-import * as moment from 'moment';
+import * as momentJs from 'moment';
 import { Component, forwardRef, Input } from '@angular/core';
 import { NgDatatableColumnComponent } from './ngdatatable.component.column';
+
+const moment = momentJs;
 
 @Component({
     selector: 'ng-date-column',
@@ -18,8 +20,12 @@ export class NgDatatableDateColumnComponent extends NgDatatableColumnComponent {
         const x = a ? moment(a).format('YYYY/MM/DD') : '';
         const y = b ? moment(b).format('YYYY/MM/DD') : '';
 
-        if (x < y) return isAscending ? -1 : 1;
-        if (x > y) return isAscending ? 1 : -1;
+        if (x < y) {
+            return isAscending ? -1 : 1;
+        }
+        if (x > y) {
+            return isAscending ? 1 : -1;
+        }
         return 0;
     }
 }

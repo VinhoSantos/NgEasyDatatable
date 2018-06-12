@@ -8,8 +8,12 @@ export abstract class NgDatatableBaseColumn {
         const x = a ? a.toString().toLowerCase() : '';
         const y = b ? b.toString().toLowerCase() : '';
 
-        if (x < y) return isAscending ? -1 : 1;
-        if (x > y) return isAscending ? 1 : -1;
+        if (x < y) {
+            return isAscending ? -1 : 1;
+        }
+        if (x > y) {
+            return isAscending ? 1 : -1;
+        }
         return 0;
     }
 }

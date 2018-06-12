@@ -1,9 +1,13 @@
-import * as _ from 'underscore';
-import { Component, Input, QueryList, ContentChildren, ContentChild, EventEmitter, Output, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import * as underscore from 'underscore';
+import { Component, Input, QueryList, ContentChildren, ContentChild, EventEmitter, Output, SimpleChanges, ChangeDetectorRef, AfterViewInit, OnChanges } from '@angular/core';
+import 'core-js/es6/array';
+
 import { NgDatatableColumnComponent } from './ngdatatable.component.column';
 import { NgDatatableBooleanColumnComponent } from './ngdatatable.component.boolean-column';
 import { NgDatatableExpandableRowComponent } from './ngdatatable.component.expandable-row';
 import { NgDatatableActionOnTableComponent } from './ngdatatable.component.action-on-table';
+
+const _ = underscore;
 
 export class RowDto {
     isExpanded: boolean;
@@ -14,13 +18,11 @@ export class FilterItem {
     text: string;
     selected: boolean;
     value: any;
-    enumType: string;
 
-    constructor(text: string, selected: boolean, value: any, enumType: string = undefined) {
+    constructor(text: string, selected: boolean, value: any) {
         this.text = text;
         this.selected = selected;
         this.value = value;
-        this.enumType = enumType;
     }
 }
 
@@ -42,10 +44,10 @@ export class SubHeader {
 
 @Component({
     selector: 'ng-datatable',
-    templateUrl: './ngdatatable.component.ng2-datatable.html'
+    templateUrl: './ngdatatable.component.ng-datatable.html'
 })
 
-export class NgDatatableComponent {
+export class NgDatatableComponent implements AfterViewInit, OnChanges {
 
     @ContentChildren(NgDatatableColumnComponent) ngDatatableColumns: QueryList<NgDatatableColumnComponent>;
     @ContentChild(NgDatatableExpandableRowComponent) expandableRow: NgDatatableExpandableRowComponent;
@@ -113,11 +115,10 @@ export class NgDatatableComponent {
     private initDatatable = () => {
         this.initColumns();
         this.initSubHeaders();
-        this.initActions();
         this.initExpandableRows();
-        
+
         this.sortAndShowData();
-        this.setFilters();        
+        this.setFilters();
     }
 
     private sortAndShowData = () => {
@@ -138,8 +139,9 @@ export class NgDatatableComponent {
         this.cdr.detectChanges();
         this.columns.forEach(c => {
             if (!!c.filter) {
-                if (c.type === 'bool')
+                if (c.type === 'bool') {
                     this.createBoolFilter(c as NgDatatableBooleanColumnComponent);
+                }
             }
         });
     }
@@ -151,8 +153,8 @@ export class NgDatatableComponent {
         
         if (!!c.filterDefault) {
             const filterDefault = c.filterDefault as boolean[];
-            filter.items.push(new FilterItem(c.trueString, filterDefault.includes(true), true));
-            filter.items.push(new FilterItem(c.falseString, filterDefault.includes(false), false));
+            filter.items.push(new FilterItem(c.trueString, filterDefault.indexOf(true) > -1, true));
+            filter.items.push(new FilterItem(c.falseString, filterDefault.indexOf(false) > -1, false));
         } else {
             filter.items.push(new FilterItem(c.trueString, true, true));
             filter.items.push(new FilterItem(c.falseString, true, false));
@@ -170,8 +172,9 @@ export class NgDatatableComponent {
         let temp = this.nonFilteredData;
         this.filters.forEach(c => {
             c.items.forEach(i => {
-                if (!i.selected)
+                if (!i.selected) {
                     temp = _.reject(temp, x => x[c.field] === i.value);
+                }
             });
         });
         this.data = temp;
@@ -186,24 +189,19 @@ export class NgDatatableComponent {
 
     private initSubHeaders = () => {
         this.subHeaders = [];
-        if (!this.showSubHeaders)
+        if (!this.showSubHeaders) {
             return;
+        }
 
         this.ngDatatableColumns.forEach((column) => {
-            if(this.subHeaders.length === 0) {
+            if (this.subHeaders.length === 0) {
                 this.subHeaders.push(new SubHeader(column.subHeader, 1));
-            } else if(this.subHeaders[this.subHeaders.length - 1].text === column.subHeader) {
+            } else if (this.subHeaders[this.subHeaders.length - 1].text === column.subHeader) {
                 this.subHeaders[this.subHeaders.length - 1].columns += 1;
             } else {
                 this.subHeaders.push(new SubHeader(column.subHeader, 1));
             }
         });
-    }
-
-    private initActions = () => {
-        if (this.actionsOnTable) {
-            this.actions = this.actionsOnTable.toArray();
-        }
     }
 
     private initExpandableRows = () => {
@@ -223,7 +221,7 @@ export class NgDatatableComponent {
         this.cdr.detectChanges();
         
         this.pageData = (this.data || []).slice((this.currentPage - 1) * this.rowsPerPage, this.currentPage * this.rowsPerPage);
-        //this.cdr.detectChanges(); //verwijderd omdat sorteren crashte, lijkt te werken maar niet zeker dit geen andere issues veroorzaakt 
+        // this.cdr.detectChanges(); //verwijderd omdat sorteren crashte, lijkt te werken maar niet zeker dit geen andere issues veroorzaakt 
         if (this.pageData.length > 0) {
             this.loadDataInColumns();
         }
@@ -250,7 +248,7 @@ export class NgDatatableComponent {
                     setTimeout(() => x.isExpandable = x[this.expandableRow.field] && x[this.expandableRow.field].length > 0);
                 }
             }
-            //this.cdr.detectChanges(); //verwijderd omdat sorteren crashte, lijkt te werken maar niet zeker dit geen andere issues veroorzaakt 
+            // this.cdr.detectChanges(); //verwijderd omdat sorteren crashte, lijkt te werken maar niet zeker dit geen andere issues veroorzaakt 
         });
     }
 
@@ -320,7 +318,7 @@ export class NgDatatableComponent {
     }
 
     setIsSelected = (row: any, isSelected: boolean) => {
-        row && (row[this.selectorPropertyName] = isSelected);
+        return row && (row[this.selectorPropertyName] = isSelected);
     }
 
     isRowSelected = (row: RowDto): boolean => {
@@ -329,7 +327,7 @@ export class NgDatatableComponent {
 
     onSelectedChange = (selectedRow: RowDto) => {
         if (this.selectionMode === 'single') {
-            for (let row of this.data) {
+            for (const row of this.data) {
                 this.setIsSelected(row, row === selectedRow && !this.isSelected(row));
             }
         } else {
@@ -341,7 +339,7 @@ export class NgDatatableComponent {
 
     onSelectedChildChange = (selectedChildRrow: any, parentRow: RowDto) => {
         if (this.expandableRow.selectionMode === 'single') {
-            for (let row of parentRow[this.expandableRow.field]) {
+            for (const row of parentRow[this.expandableRow.field]) {
                 this.setIsSelected(row, row === selectedChildRrow && !row.isSelected);
             }
         } else {
@@ -349,15 +347,6 @@ export class NgDatatableComponent {
         }
 
         this.selectionUpdated.emit(parentRow);
-    }
-
-    onQuickSelectChanged = () => {
-        if(!this.data)
-            return;
-
-        for (let row of this.data) {
-            this.selectionUpdated.emit(row);
-        }
     }
 
     calculateRowIndex = (index: number): number => {
