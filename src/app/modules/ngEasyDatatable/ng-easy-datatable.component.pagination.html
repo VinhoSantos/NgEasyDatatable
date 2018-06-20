@@ -1,5 +1,5 @@
 <div class="d-flex bd-highlight justify-content-between">
-    <ul class="ng-datatable pagination justify-content-center">
+    <ul class="ng-easy-datatable pagination justify-content-center">
         <li class="page-item" [ngClass]="{'disabled': isFirstPage()}">
             <a class="page-link" (click)="goToFirstPage()" (keyup.enter)="goToFirstPage()" tabindex="0" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
@@ -13,7 +13,7 @@
             </a>
         </li>
     </ul>
-    <ul class="ng-datatable pagination justify-content-center">
+    <ul class="ng-easy-datatable pagination justify-content-center">
         <li class="page-item disabled">
             <span class="page-link" *ngIf="hasMorePreviousPages()">...</span>
         </li>
@@ -26,7 +26,7 @@
             <span class="page-link" *ngIf="hasMoreNextPages()">...</span>
         </li>
     </ul>
-    <ul class="ng-datatable pagination justify-content-center">
+    <ul class="ng-easy-datatable pagination justify-content-center">
         <li class="page-item" [ngClass]="{'disabled': isLastPage()}">
             <a class="page-link" (click)="goToNextPage()" (keyup.enter)="goToNextPage()" tabindex="0" aria-label="Next">
                 <span aria-hidden="true">&rsaquo;</span>

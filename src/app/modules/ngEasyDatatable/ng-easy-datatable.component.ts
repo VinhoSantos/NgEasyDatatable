@@ -2,10 +2,10 @@ import * as underscore from 'underscore';
 import { Component, Input, QueryList, ContentChildren, ContentChild, EventEmitter, Output, SimpleChanges, ChangeDetectorRef, AfterViewInit, OnChanges } from '@angular/core';
 import 'core-js/es6/array';
 
-import { NgDatatableColumnComponent } from './ngdatatable.component.column';
-import { NgDatatableBooleanColumnComponent } from './ngdatatable.component.boolean-column';
-import { NgDatatableExpandableRowComponent } from './ngdatatable.component.expandable-row';
-import { NgDatatableActionOnTableComponent } from './ngdatatable.component.action-on-table';
+import { NgEasyDatatableColumnComponent } from './ng-easy-datatable.component.column';
+import { NgEasyDatatableBooleanColumnComponent } from './ng-easy-datatable.component.boolean-column';
+import { NgEasyDatatableExpandableRowComponent } from './ng-easy-datatable.component.expandable-row';
+import { NgEasyDatatableActionOnTableComponent } from './ng-easy-datatable.component.action-on-table';
 
 const _ = underscore;
 
@@ -43,15 +43,15 @@ export class SubHeader {
 }
 
 @Component({
-    selector: 'ng-datatable',
-    templateUrl: './ngdatatable.component.ng-datatable.html'
+    selector: 'ng-easy-datatable',
+    templateUrl: './ng-easy-datatable.component.html'
 })
 
-export class NgDatatableComponent implements AfterViewInit, OnChanges {
+export class NgEasyDatatableComponent implements AfterViewInit, OnChanges {
 
-    @ContentChildren(NgDatatableColumnComponent) ngDatatableColumns: QueryList<NgDatatableColumnComponent>;
-    @ContentChild(NgDatatableExpandableRowComponent) expandableRow: NgDatatableExpandableRowComponent;
-    @ContentChildren(NgDatatableActionOnTableComponent) actionsOnTable: QueryList<NgDatatableActionOnTableComponent>;
+    @ContentChildren(NgEasyDatatableColumnComponent) ngDatatableColumns: QueryList<NgEasyDatatableColumnComponent>;
+    @ContentChild(NgEasyDatatableExpandableRowComponent) expandableRow: NgEasyDatatableExpandableRowComponent;
+    @ContentChildren(NgEasyDatatableActionOnTableComponent) actionsOnTable: QueryList<NgEasyDatatableActionOnTableComponent>;
 
     nonFilteredData: RowDto[];
     @Input() data: RowDto[];
@@ -74,9 +74,9 @@ export class NgDatatableComponent implements AfterViewInit, OnChanges {
     @Output() filterUpdated = new EventEmitter<FilterItem[]>();
 
     pageData: RowDto[];
-    columns: NgDatatableColumnComponent[] = [];
-    expandableColumns: NgDatatableColumnComponent[] = [];
-    actions: NgDatatableActionOnTableComponent[] = [];
+    columns: NgEasyDatatableColumnComponent[] = [];
+    expandableColumns: NgEasyDatatableColumnComponent[] = [];
+    actions: NgEasyDatatableActionOnTableComponent[] = [];
     expandableRowHasColumnHeaders = false;
     selectedRows: number[] = [];
     selectedIds: string[] = [];
@@ -140,13 +140,13 @@ export class NgDatatableComponent implements AfterViewInit, OnChanges {
         this.columns.forEach(c => {
             if (!!c.filter) {
                 if (c.type === 'bool') {
-                    this.createBoolFilter(c as NgDatatableBooleanColumnComponent);
+                    this.createBoolFilter(c as NgEasyDatatableBooleanColumnComponent);
                 }
             }
         });
     }
 
-    private createBoolFilter = (c: NgDatatableBooleanColumnComponent) => {
+    private createBoolFilter = (c: NgEasyDatatableBooleanColumnComponent) => {
         const filter = new Filter();
         filter.filter = c.filter;
         filter.field = c.field;
@@ -303,7 +303,7 @@ export class NgDatatableComponent implements AfterViewInit, OnChanges {
         }
     }
 
-    private compare = (column: NgDatatableColumnComponent, a: any, b: any): number => {
+    private compare = (column: NgEasyDatatableColumnComponent, a: any, b: any): number => {
         return column.compare(a, b, this.isAscending());
     }
 

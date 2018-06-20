@@ -1,11 +1,11 @@
 import { Component, Input, TemplateRef, ContentChild, OnInit, OnDestroy, EmbeddedViewRef, ViewContainerRef } from '@angular/core';
-import { NgDatatableBaseColumn } from './base-column';
+import { NgEasyDatatableBaseColumn } from './ng-easy-datatable.base-column';
 
 @Component({
     selector: 'ng-column',
     template: ''
 })
-export class NgDatatableColumnComponent extends NgDatatableBaseColumn implements OnInit {
+export class NgEasyDatatableColumnComponent extends NgEasyDatatableBaseColumn implements OnInit {
 
     @Input() field: string;
     @Input() header: string;
@@ -95,9 +95,9 @@ export class NgDatatableColumnComponent extends NgDatatableBaseColumn implements
     selector: 'ng-body-template',
     template: ''
 })
-export class NgDatatableColumnBodyTemplateLoader implements OnInit, OnDestroy {
+export class NgEasyDatatableColumnBodyTemplateLoader implements OnInit, OnDestroy {
 
-    @Input() column: NgDatatableColumnComponent;
+    @Input() column: NgEasyDatatableColumnComponent;
     @Input() rowData: any;
     @Input() rowIndex: number;
     view: EmbeddedViewRef<any>;
@@ -121,9 +121,9 @@ export class NgDatatableColumnBodyTemplateLoader implements OnInit, OnDestroy {
     selector: 'ng-header-template',
     template: ''
 })
-export class NgDatatableColumnHeaderTemplateLoader implements OnInit, OnDestroy {
+export class NgEasyDatatableColumnHeaderTemplateLoader implements OnInit, OnDestroy {
 
-    @Input() column: NgDatatableColumnComponent;
+    @Input() column: NgEasyDatatableColumnComponent;
     view: EmbeddedViewRef<any>;
 
     constructor(public viewContainer: ViewContainerRef) { }
@@ -143,9 +143,9 @@ export class NgDatatableColumnHeaderTemplateLoader implements OnInit, OnDestroy 
     selector: 'ng-expandable-body-template',
     template: ''
 })
-export class NgDatatableColumnExpandableBodyTemplateLoader implements OnInit, OnDestroy {
+export class NgEasyDatatableColumnExpandableBodyTemplateLoader implements OnInit, OnDestroy {
 
-    @Input() column: NgDatatableColumnComponent;
+    @Input() column: NgEasyDatatableColumnComponent;
     @Input() rowData: any;
     @Input() rowIndex: number;
     view: EmbeddedViewRef<any>;
@@ -169,9 +169,9 @@ export class NgDatatableColumnExpandableBodyTemplateLoader implements OnInit, On
     selector: 'ng-expandable-header-template',
     template: ''
 })
-export class NgDatatableColumnExpandableHeaderTemplateLoader implements OnInit, OnDestroy {
+export class NgEasyDatatableColumnExpandableHeaderTemplateLoader implements OnInit, OnDestroy {
 
-    @Input() column: NgDatatableColumnComponent;
+    @Input() column: NgEasyDatatableColumnComponent;
     view: EmbeddedViewRef<any>;
 
     constructor(public viewContainer: ViewContainerRef) { }

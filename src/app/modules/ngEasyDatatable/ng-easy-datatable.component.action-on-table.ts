@@ -4,7 +4,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     selector: 'ng-action-on-table',
     template: ''
 })
-export class NgDatatableActionOnTableComponent {
+export class NgEasyDatatableActionOnTableComponent {
 
     @Input() title: string;
     @Input() class: string;

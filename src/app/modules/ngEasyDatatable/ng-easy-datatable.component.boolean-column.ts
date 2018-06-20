@@ -1,12 +1,12 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { NgDatatableColumnComponent } from './ngdatatable.component.column';
+import { NgEasyDatatableColumnComponent } from './ng-easy-datatable.component.column';
 
 @Component({
     selector: 'ng-boolean-column',
     template: '',
-    providers: [{ provide: NgDatatableColumnComponent, useExisting: forwardRef(() => NgDatatableBooleanColumnComponent) }]
+    providers: [{ provide: NgEasyDatatableColumnComponent, useExisting: forwardRef(() => NgEasyDatatableBooleanColumnComponent) }]
 })
-export class NgDatatableBooleanColumnComponent extends NgDatatableColumnComponent {
+export class NgEasyDatatableBooleanColumnComponent extends NgEasyDatatableColumnComponent {
 
     @Input() trueString = 'Ja';
     @Input() falseString = 'Nee';
@@ -23,8 +23,13 @@ export class NgDatatableBooleanColumnComponent extends NgDatatableColumnComponen
     }
 
     compare = (a: any, b: any, isAscending: boolean): number => {
-        if (a < b) return isAscending ? -1 : 1;
-        if (a > b) return isAscending ? 1 : -1;
+        if (a < b) {
+            return isAscending ? -1 : 1;
+        }
+        if (a > b) {
+            return isAscending ? 1 : -1;
+        }
+            
         return 0;
     }
 }

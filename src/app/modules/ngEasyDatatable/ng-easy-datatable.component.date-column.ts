@@ -1,15 +1,15 @@
 import * as momentJs from 'moment';
 import { Component, forwardRef, Input } from '@angular/core';
-import { NgDatatableColumnComponent } from './ngdatatable.component.column';
+import { NgEasyDatatableColumnComponent } from './ng-easy-datatable.component.column';
 
 const moment = momentJs;
 
 @Component({
     selector: 'ng-date-column',
     template: '',
-    providers: [{ provide: NgDatatableColumnComponent, useExisting: forwardRef(() => NgDatatableDateColumnComponent) }]
+    providers: [{ provide: NgEasyDatatableColumnComponent, useExisting: forwardRef(() => NgEasyDatatableDateColumnComponent) }]
 })
-export class NgDatatableDateColumnComponent extends NgDatatableColumnComponent {
+export class NgEasyDatatableDateColumnComponent extends NgEasyDatatableColumnComponent {
     @Input() format = 'DD/MM/YYYY';
 
     updateContent = (row: any) => {

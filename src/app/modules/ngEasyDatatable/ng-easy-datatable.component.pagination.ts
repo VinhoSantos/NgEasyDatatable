@@ -2,10 +2,10 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
     selector: 'ng-pagination',
-    templateUrl: './ngdatatable.component.pagination.html'
+    templateUrl: './ng-easy-datatable.component.pagination.html'
 })
 
-export class NgDatatablePaginationComponent implements OnInit {
+export class NgEasyDatatablePaginationComponent implements OnInit {
 
     @Input()
     set totalPages(totalPages: number) {

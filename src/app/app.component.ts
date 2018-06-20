@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Car, CARS } from './modules/ngDatatable/car';
+import { CARS } from './modules/ngEasyDatatable/car';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +7,6 @@ import { Car, CARS } from './modules/ngDatatable/car';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'NG Datatable';
+  title = 'NG Simple Datatable';
   cars = CARS;
 }

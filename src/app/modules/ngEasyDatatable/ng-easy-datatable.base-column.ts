@@ -1,4 +1,4 @@
-export abstract class NgDatatableBaseColumn {
+export abstract class NgEasyDatatableBaseColumn {
 
     isSortedAsc = false;
     isSortedDesc = false;

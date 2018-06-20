@@ -1,10 +1,10 @@
-import { NgDatatablePage } from './app.po';
+import { NgEasyDatatablePage } from './app.po';
 
-describe('ng-datatable App', () => {
-  let page: NgDatatablePage;
+describe('ng-easy-datatable App', () => {
+  let page: NgEasyDatatablePage;
 
   beforeEach(() => {
-    page = new NgDatatablePage();
+    page = new NgEasyDatatablePage();
   });
 
   it('should display message saying app works', () => {

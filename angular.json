@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-datatable": {
+    "ng-easy-datatable": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -48,18 +48,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-datatable:build"
+            "browserTarget": "ng-easy-datatable:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-datatable:build:production"
+              "browserTarget": "ng-easy-datatable:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-datatable:build"
+            "browserTarget": "ng-easy-datatable:build"
           }
         },
         "test": {
@@ -91,7 +91,7 @@
         }
       }
     },
-    "ng-datatable-e2e": {
+    "ng-easy-datatable-e2e": {
       "root": "",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -100,7 +100,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ng-datatable:serve"
+            "devServerTarget": "ng-easy-datatable:serve"
           }
         },
         "lint": {
@@ -115,7 +115,7 @@
       }
     }
   },
-  "defaultProject": "ng-datatable",
+  "defaultProject": "ng-easy-datatable",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

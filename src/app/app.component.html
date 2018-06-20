@@ -2,7 +2,7 @@
   {{title}}
 </h1>
 
-<ng-datatable [data]="cars">
+<ng-easy-datatable [data]="cars">
   <ng-column [showToggler]="true"></ng-column>
   <ng-column [field]="'brand'" [header]="'Merk'" [sortable]="true"></ng-column>
   <ng-column [field]="'name'" [header]="'Naam'" [sortable]="true"></ng-column>
@@ -11,4 +11,4 @@
     <ng-column [field]="'name'" [header]="'Naam'"></ng-column>
     <ng-date-column [field]="'startDate'" [header]="'Gekocht op'"></ng-date-column>
   </ng-expandable-row>
-</ng-datatable>
+</ng-easy-datatable>

@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class NgDatatablePage {
+export class NgEasyDatatablePage {
   navigateTo() {
     return browser.get('/');
   }

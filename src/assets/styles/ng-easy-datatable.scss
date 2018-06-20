@@ -1,4 +1,4 @@
-table.ng-datatable {
+table.ng-easy-datatable {
     thead {
         th {
             text-transform: uppercase;
@@ -74,7 +74,7 @@ table.ng-datatable {
     }
 }
 
-ul.ng-datatable.pagination {
+ul.ng-easy-datatable.pagination {
     li {
         &.page-item {
             &.active {

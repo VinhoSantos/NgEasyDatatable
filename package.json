@@ -1,5 +1,5 @@
 {
-  "name": "ng-datatable",
+  "name": "ng-easy-datatable",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -11,10 +11,7 @@
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p ng-package.json"
   },
-  "ngDatatable": {
-    "whitelistedNonPeerDependencies": ["."]
-  },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/common": "^6.0.4",
     "@angular/compiler": "^6.0.4",
