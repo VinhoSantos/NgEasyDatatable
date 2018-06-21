@@ -44,7 +44,7 @@ export class SubHeader {
 
 @Component({
     selector: 'ng-easy-datatable',
-    templateUrl: './ng-easy-datatable.component.html'
+    templateUrl: './ng-easy-datatable.component.datatable.html'
 })
 
 export class NgEasyDatatableComponent implements AfterViewInit, OnChanges {
@@ -58,8 +58,8 @@ export class NgEasyDatatableComponent implements AfterViewInit, OnChanges {
     @Input() sortOn: number;
     @Input() pagination = true;
     @Input() rowsPerPage = 10;
-    @Input() loadingText = 'gegevens ophalen...';
-    @Input() emptyDataText = 'Geen gegevens aanwezig in de tabel';
+    @Input() loadingText = 'Loading data...';
+    @Input() emptyDataText = 'No data available';
     @Input() selectText: string;
     @Input() deselectText: string;
     @Input() toggleText: string;
@@ -221,7 +221,6 @@ export class NgEasyDatatableComponent implements AfterViewInit, OnChanges {
         this.cdr.detectChanges();
         
         this.pageData = (this.data || []).slice((this.currentPage - 1) * this.rowsPerPage, this.currentPage * this.rowsPerPage);
-        // this.cdr.detectChanges(); //verwijderd omdat sorteren crashte, lijkt te werken maar niet zeker dit geen andere issues veroorzaakt 
         if (this.pageData.length > 0) {
             this.loadDataInColumns();
         }
@@ -247,8 +246,7 @@ export class NgEasyDatatableComponent implements AfterViewInit, OnChanges {
                     });
                     setTimeout(() => x.isExpandable = x[this.expandableRow.field] && x[this.expandableRow.field].length > 0);
                 }
-            }
-            // this.cdr.detectChanges(); //verwijderd omdat sorteren crashte, lijkt te werken maar niet zeker dit geen andere issues veroorzaakt 
+            } 
         });
     }
 

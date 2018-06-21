@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NgEasyDatatableComponent } from './ng-easy-datatable.component';
+import { NgEasyDatatableComponent } from './ng-easy-datatable.component.datatable';
 import {
     NgEasyDatatableColumnComponent,
     NgEasyDatatableColumnBodyTemplateLoader,
